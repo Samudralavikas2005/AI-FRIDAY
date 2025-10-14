@@ -1,0 +1,338 @@
+{
+    "2025-10-10": [
+        {
+            "q": "what is the time now",
+            "a": "The time is 09:25 PM"
+        },
+        {
+            "q": "search narendra modi",
+            "a": "Searching Google for: narendra modi"
+        },
+        {
+            "q": "play playlist",
+            "a": "Playing your entire playlist."
+        },
+        {
+            "q": "list history",
+            "a": "All recorded history:\n\n2025-10-10:\n1. what is the time now\n2. search narendra modi\n3. play playlist"
+        },
+        {
+            "q": "remind me to sleep in 1 hour",
+            "a": "Reminder set for 'sleep' at 10:26 PM"
+        },
+        {
+            "q": "clear reminder",
+            "a": "I've cleared all your reminders."
+        },
+        {
+            "q": "clear reminders",
+            "a": "All reminders cleared."
+        },
+        {
+            "q": "create a study plan for artificial intelligence for the exam on october 12th",
+            "a": "Here's a sample study plan for your Artificial Intelligence exam on October 12th. This plan assumes you have roughly two weeks to prepare. Remember to adjust it based on your current knowledge, available time, and the specific topics emphasized by your instructor. General Principles: Break it Down: Don't try to cram everything in at once. Divide topics into manageable chunks. Active Learning: Don't just read. Summarize, create flashcards, work through examples, and teach concepts to someone else (even a rubber duck!). Practice, Practice, Practice: Solve problems, work on coding exercises, and attempt past papers if available. Review Regularly: Revisit topics you've already covered to reinforce your understanding. Breaks are Crucial: Avoid burnout. Schedule regular breaks and get enough sleep. Assumptions: Current Date: Let's"
+        },
+        {
+            "q": "create a study plan for python programming for exam on october 12th 2025",
+            "a": "Okay, here's a structured study plan for your Python programming exam on October 12th, 2025. This plan aims to be comprehensive, assuming you have a reasonable amount of time to prepare and want to cover all essential aspects. Key Principles for Success: Active Learning: Don't just read. Write code, experiment, debug, and try to explain concepts in your own words. Spaced Repetition: Revisit topics regularly to solidify your understanding. Problem Solving: Focus on applying your knowledge to solve problems. Consistency: Stick to a schedule as much as possible. Breaks: Schedule regular breaks to avoid burnout and maintain focus. Assumptions: Current Date: Today is approximately late September 2025 (giving you about 2 weeks). Exam Scope: Covers fundamental to intermediate Python concepts."
+        },
+        {
+            "q": "create a study plan for python programming exam on december 15 2025",
+            "a": "Okay, here's a study plan for your Python programming exam on December 15th, 2025. This plan assumes you're starting now and have a good chunk of time to prepare, allowing for deeper dives into concepts and more practice. Key Principles for Success: Active Learning: Don't just read. Write code, experiment, debug, and try to explain concepts in your own words. Spaced Repetition: Revisit topics regularly to solidify your understanding. Problem Solving: Focus on applying your knowledge to solve problems. This is crucial for exams. Consistency: Stick to a schedule as much as possible. Breaks: Schedule regular breaks to avoid burnout and maintain focus. Targeted Practice: Identify areas where you struggle and dedicate extra time to them. Assumptions: Current Date: Approximately late September 2"
+        },
+        {
+            "q": "create study plan for python programming for exam on october 12th",
+            "a": "Study plan created for python programming with exam on 2025-10-12. Found 9 topics to study."
+        },
+        {
+            "q": "clear study plan",
+            "a": "Study plan cleared successfully."
+        },
+        {
+            "q": "remind me to eat in 1 minute",
+            "a": "Reminder set for 'eat' at 09:51 PM"
+        },
+        {
+            "q": "create a study plan for computer networks for exam on october 13th 2025",
+            "a": "Okay, here is a study plan for your Computer Networks exam on October 13th, 2025. This plan assumes you have about two weeks to prepare and covers the core topics typically found in a computer networks course. Key Principles for Success: Understand Concepts, Not Just Memorize: Focus on why things work the way they do. Visual Aids: Draw diagrams of network topologies, packet flows, and protocol stacks. Active Recall: Test yourself frequently. Don't just re-read notes. Problem Solving: Work through examples, especially for calculations like subnetting or congestion control. Consistency: Stick to the schedule as much as possible. Breaks: Schedule short, regular breaks to maintain focus and prevent burnout. Review: Dedicate time to revisit topics already covered. Assumptions: Current Date"
+        },
+        {
+            "q": "create a study plan for computer networks for exam on october 12th 2025",
+            "a": "Okay, here is a study plan for your Computer Networks exam on October 12th, 2025. This plan assumes you have about two weeks to prepare and covers the core topics typically found in a computer networks course. Key Principles for Success: Understand Concepts, Not Just Memorize: Focus on why things work the way they do. Visual Aids: Draw diagrams of network topologies, packet flows, and protocol stacks. Active Recall: Test yourself frequently. Don't just re-read notes. Problem Solving: Work through examples, especially for calculations like subnetting or congestion control. Consistency: Stick to the schedule as much as possible. Breaks: Schedule short, regular breaks to maintain focus and prevent burnout. Review: Dedicate time to revisit topics already covered. Assumptions: Current Date: Today is"
+        },
+        {
+            "q": "create study plan for computer networks for exam on october 12th 2025",
+            "a": "Study plan created for computer networks with exam on 2025-10-12. Found 9 topics to study."
+        },
+        {
+            "q": "create study plan for",
+            "a": "Study plan created for machine learning."
+        },
+        {
+            "q": "clear study plan",
+            "a": "Study plan cleared successfully."
+        },
+        {
+            "q": "list reminders",
+            "a": "You have no reminders set."
+        },
+        {
+            "q": "list history",
+            "a": "All recorded history:\n\n2025-10-10:\n1. what is the time now\n2. search narendra modi\n3. play playlist\n4. list history\n5. remind me to sleep in 1 hour\n6. clear reminder\n7. clear reminders\n8. create a study plan for artificial intelligence for the exam on october 12th\n9. create a study plan for python programming for exam on october 12th 2025\n10. create a study plan for python programming exam on december 15 2025\n11. create study plan for python programming for exam on october 12th\n12. clear study plan\n13. remind me to eat in 1 minute\n14. create a study plan for computer networks for exam on october 13th 2025\n15. create a study plan for computer networks for exam on october 12th 2025\n16. create study plan for computer networks for exam on october 12th 2025\n17. create study plan for\n18. clear study plan\n19. list reminders"
+        },
+        {
+            "q": "list study plan",
+            "a": "Here are the current study plans: Machine Learning Exam Date: (Not specified) Topics: (Not specified) Artificial Intelligence Exam Date: 2025-10-12 Topics: (Not specified) Python Programming Exam Date: 2025-10-12 Topics: (Not specified) Python Programming Exam Date: 2025-12-15 Topics: (Not specified) Computer Networks Exam Date: 2025-10-12 Topics: (Not specified) Please let me know if you'd like to add details to any of these or create new ones!"
+        },
+        {
+            "q": "what's my study schedule for today",
+            "a": "No study plan found. Please create a study plan first by saying 'create study plan'."
+        },
+        {
+            "q": "what is the time now",
+            "a": "The time is 10:14 PM"
+        },
+        {
+            "q": "what is the date today",
+            "a": "The date is Friday, 10 October 2025"
+        }
+    ],
+    "2025-10-11": [
+        {
+            "q": "send email",
+            "a": "Email cancelled."
+        },
+        {
+            "q": "send email",
+            "a": "Email cancelled."
+        },
+        {
+            "q": "send email",
+            "a": "Email cancelled."
+        },
+        {
+            "q": "send email",
+            "a": "Email cancelled."
+        },
+        {
+            "q": "send email",
+            "a": "Email cancelled."
+        },
+        {
+            "q": "send email",
+            "a": "Email cancelled."
+        },
+        {
+            "q": "send an email",
+            "a": "I can help with that! To send an email, I need a bit more information. Please tell me: To whom: The email address(es) of the recipient(s). Subject: The subject line of the email. Body: The message you want to include in the email. Once I have these details, I can send the email for you."
+        },
+        {
+            "q": "list history",
+            "a": "All recorded history:\n\n2025-10-10:\n1. what is the time now\n2. search narendra modi\n3. play playlist\n4. list history\n5. remind me to sleep in 1 hour\n6. clear reminder\n7. clear reminders\n8. create a study plan for artificial intelligence for the exam on october 12th\n9. create a study plan for python programming for exam on october 12th 2025\n10. create a study plan for python programming exam on december 15 2025\n11. create study plan for python programming for exam on october 12th\n12. clear study plan\n13. remind me to eat in 1 minute\n14. create a study plan for computer networks for exam on october 13th 2025\n15. create a study plan for computer networks for exam on october 12th 2025\n16. create study plan for computer networks for exam on october 12th 2025\n17. create study plan for\n18. clear study plan\n19. list reminders\n20. list history\n21. list study plan\n22. what's my study schedule for today\n23. what is the time now\n24. what is the date today\n\n2025-10-11:\n25. send email\n26. send email\n27. send email\n28. send email\n29. send email\n30. send email\n31. send an email"
+        },
+        {
+            "q": "send mail",
+            "a": "I can help with that! To send an email, I need a bit more information. Please tell me: To whom: The email address(es) of the recipient(s). Subject: The subject line of the email. Body: The message you want to include in the email. Once I have these details, I can send the email for you."
+        },
+        {
+            "q": "send email",
+            "a": "Email cancelled."
+        },
+        {
+            "q": "write email",
+            "a": "Email not configured. Please set SENDER_EMAIL and SENDER_PASSWORD environment variables."
+        },
+        {
+            "q": "send email",
+            "a": "Email not configured. Please set SENDER_EMAIL and SENDER_PASSWORD environment variables."
+        },
+        {
+            "q": "send email",
+            "a": "Failed to send email: (535, b'5.7.8 Username and Password not accepted. For more information, go to\\n5.7.8  https://support.google.com/mail/?p=BadCredentials 98e67ed59e1d1-33b626e8bf5sm6150430a91.23 - gsmtp')"
+        },
+        {
+            "q": "send email",
+            "a": "Failed to send email: (535, b'5.7.8 Username and Password not accepted. For more information, go to\\n5.7.8  https://support.google.com/mail/?p=BadCredentials 41be03b00d2f7-b678dcc2356sm4899595a12.2 - gsmtp')"
+        },
+        {
+            "q": "send email",
+            "a": "Failed to send email: (535, b'5.7.8 Username and Password not accepted. For more information, go to\\n5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-29040e02648sm51421915ad.116 - gsmtp')"
+        },
+        {
+            "q": "send email",
+            "a": "Failed to send email: (534, b'5.7.9 Application-specific password required. For more information, go to\\n5.7.9  https://support.google.com/mail/?p=InvalidSecondFactor d9443c01a7336-29034f837dcsm84452315ad.111 - gsmtp')"
+        },
+        {
+            "q": "send email",
+            "a": "Email cancelled."
+        },
+        {
+            "q": "send email",
+            "a": "Email successfully sent to samudralavikas27@gmail.com"
+        },
+        {
+            "q": "send email",
+            "a": "Could not find or get email address for soumika."
+        },
+        {
+            "q": "what is the weather tomorrow in",
+            "a": "Sorry, I couldn't find weather info for ."
+        },
+        {
+            "q": "send email",
+            "a": "Could not find or get email address for soumika."
+        },
+        {
+            "q": "send email",
+            "a": "Email cancelled."
+        },
+        {
+            "q": "send email",
+            "a": "Email successfully sent to addalasoumika@gmail.com"
+        }
+    ],
+    "2025-10-12": [
+        {
+            "q": "send email to vikas",
+            "a": "Email successfully sent to samudralavikas27@gmail.com"
+        },
+        {
+            "q": "set a timer for 1",
+            "a": "The time is 10:52 AM"
+        },
+        {
+            "q": "count from 1 to 60",
+            "a": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 5"
+        },
+        {
+            "q": "create study plan for secure coding",
+            "a": "Study plan created for secure coding."
+        },
+        {
+            "q": "clear study plans",
+            "a": "Study plan cleared successfully."
+        },
+        {
+            "q": "monitor test dot",
+            "a": "I can't monitor a test dot. Is there anything else I can help you with?"
+        },
+        {
+            "q": "monitor test.py",
+            "a": "File monitortest.py not found"
+        },
+        {
+            "q": "monitor test.py",
+            "a": "File monitortest.py not found"
+        },
+        {
+            "q": "test.py",
+            "a": "File test.py not found."
+        },
+        {
+            "q": "monitor file test.py",
+            "a": "File monitorfiletest.py not found"
+        },
+        {
+            "q": "monitor file test dot pi",
+            "a": "File test dot pi not found"
+        },
+        {
+            "q": "monitor file test.py",
+            "a": "Now monitoring test.py for errors and optimizations"
+        },
+        {
+            "q": "list monitored files",
+            "a": "File ed files not found"
+        },
+        {
+            "q": "list monitored files",
+            "a": "File ed files not found"
+        },
+        {
+            "q": "list monitored files",
+            "a": "File ed files not found"
+        },
+        {
+            "q": "what files are you monitoring",
+            "a": "File ing.py not found"
+        },
+        {
+            "q": "what files are you monitoring",
+            "a": "File ing.py not found"
+        },
+        {
+            "q": "what files",
+            "a": "No files being monitored"
+        },
+        {
+            "q": "monitor file test.py",
+            "a": "Now monitoring test.py for errors and optimizations"
+        },
+        {
+            "q": "what files",
+            "a": "Monitoring 1 files: test.py"
+        },
+        {
+            "q": "what",
+            "a": "I can help you monitor files for errors and optimizations. You can tell me to \"monitor file [filename]\" or \"unmonitor file [filename]\". I can also list the files I'm currently monitoring if you ask \"what files\"."
+        },
+        {
+            "q": "what files",
+            "a": "Monitoring 1 files: test.py"
+        },
+        {
+            "q": "stop monitoring all files",
+            "a": "File ing all files not found"
+        },
+        {
+            "q": "stop monitoring",
+            "a": "Stopped monitoring test.py"
+        },
+        {
+            "q": "what files",
+            "a": "No files being monitored"
+        },
+        {
+            "q": "monitor file test.py",
+            "a": "Now monitoring test.py for errors and optimizations"
+        },
+        {
+            "q": "stock monitoring",
+            "a": "I can monitor files for errors and optimizations. I can also list the files I'm currently monitoring if you ask \"what files\". You can tell me to \"monitor file [filename]\" or \"unmonitor file [filename]\"."
+        },
+        {
+            "q": "stop monitoring",
+            "a": "Stopped monitoring test.py"
+        },
+        {
+            "q": "monitor file test.py",
+            "a": "Now monitoring test.py for errors and optimizations"
+        },
+        {
+            "q": "write email",
+            "a": "I can help you write an email! To get started, please tell me: Who is the email to? (e.g., a colleague, a client, a friend, a specific person's name and email address) What is the main purpose of the email? (e.g., to ask a question, to provide an update, to request something, to confirm a meeting, to thank someone) What are the key points you want to include? (the more details you provide, the better I can tailor the email) Do you have a preferred tone? (e.g., formal, informal, friendly, urgent) Is there anything else I should know? (e.g., a deadline, a specific subject line you'd like, attachments to mention) Once I have this information, I can draft an email for"
+        },
+        {
+            "q": "send email",
+            "a": "I can help you draft an email, but I can't actually send emails from here. Once you've finalized the email I help you create, you'll need to copy and paste it into your own email client (like Gmail, Outlook, etc.) and send it from there. To help you draft an email, could you please tell me: Who is the email to? (e.g., a colleague, a client, a friend, a specific person's name and email address) What is the main purpose of the email? (e.g., to ask a question, to provide an update, to request something, to confirm a meeting, to thank someone) What are the key points you want to include? (the more details you provide, the better I can tailor the email) Do you have a preferred tone? (e.g., formal, informal"
+        },
+        {
+            "q": "send email to vikas",
+            "a": "Email successfully sent to samudralavikas27@gmail.com"
+        },
+        {
+            "q": "what is the linux command to list the files",
+            "a": "The most common Linux command to list files is `ls`. Here are some common variations and options: `ls`: This will list the files and directories in the current directory. `ls -l`: This provides a \"long listing\" format, showing details like permissions, owner, size, and modification date. `ls -a`: This lists all files, including hidden files (those that start with a dot `.`). `ls -lh`: This is a combination of `-l` and `-h`, meaning it will show the long listing with human-readable file sizes (e.g., KB, MB, GB). `ls /path/to/directory`: You can specify a path to list files in a different directory. For example, `ls /home/user/documents` would list files in the `documents` directory within the `user`'"
+        },
+        {
+            "q": "how to check the present working director",
+            "a": "The Linux command to check your present working directory is `pwd`. Just type `pwd` in your terminal and press Enter, and it will display the full path of your current directory."
+        }
+    ],
+    "2025-10-13": [
+        {
+            "q": "send email to vikas",
+            "a": "Email successfully sent to samudralavikas27@gmail.com"
+        }
+    ]
+}
