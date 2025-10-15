@@ -1,4 +1,7 @@
+# [file name]: main.py
+# [file content begin]
 # main.py
+import os
 import sys
 import signal
 import threading
@@ -16,6 +19,7 @@ from utilities.calendar import CalendarService
 from utilities.music_player import MusicPlayer
 from utilities.email_manager import EmailManager
 from utilities.contact_manager import ContactManager
+from utilities.file_search import FileSearchManager
 from system.system_commands import SystemCommands
 
 
@@ -33,10 +37,13 @@ class FridayAssistant:
         self.music_player = MusicPlayer()
         self.system_commands = SystemCommands()
         
-        # NEW: Email and Contact managers
+        # File Search Manager
+        self.file_search = FileSearchManager()
+
+        # Email and Contact managers
         self.email_manager = EmailManager()
         self.contact_manager = ContactManager()
-        
+
         # Conversation state
         self.conversation_state = {
             'active': False,
@@ -44,11 +51,16 @@ class FridayAssistant:
             'retry_count': 0,
             'max_retries': 3
         }
-    
+        
+        # File search state
+        self.last_search_results = []
+        self.last_search_keyword = ""
+        self.in_file_selection_mode = False
+
     def greet_user(self):
         greeting = self.system_commands.get_greeting()
         self.tts.speak(greeting)
-    
+
     def reset_conversation_state(self):
         self.conversation_state = {
             'active': False,
@@ -56,27 +68,28 @@ class FridayAssistant:
             'retry_count': 0,
             'max_retries': 3
         }
-    
+        self.in_file_selection_mode = False
+
     def listen_with_retry(self, context=None, prompt=None, max_retries=3):
         if context:
             self.conversation_state['active'] = True
             self.conversation_state['current_context'] = context
             self.conversation_state['retry_count'] = 0
             self.conversation_state['max_retries'] = max_retries
-        
+
         retry_count = 0
         while retry_count < max_retries:
             if prompt and retry_count == 0:
                 self.tts.speak(prompt)
             elif retry_count > 0:
-            
                 if context == "email_confirmation":
                     self.tts.speak("Please say 'yes' to send the email or 'no' to cancel.")
-                    
                 elif context == "delete_subjects":
-                    self.tts.speak("I didn't catch which subjects to delete. Please say the number again, 'one' or 'one and thre'.")
+                    self.tts.speak(
+                        "I didn't catch which subjects to delete. Please say the number again, 'one' or 'one and three'.")
                 elif context == "study_hours":
-                    self.tts.speak("I didn't understand how many hours you can study. Please say a number like '3' or 'four hours'.")
+                    self.tts.speak(
+                        "I didn't understand how many hours you can study. Please say a number like '3' or 'four hours'.")
                 elif context == "exam_date":
                     self.tts.speak("I didn't catch the exam date. Please say it again, like 'December 15 2025'.")
                 elif context == "subject_difficulty":
@@ -91,17 +104,21 @@ class FridayAssistant:
                     self.tts.speak("I didn't catch what you want to search for. Please say your search query again.")
                 elif context == "wikipedia_topic":
                     self.tts.speak("I didn't catch the topic. Please say it again.")
+                elif context == "search_keyword":
+                    self.tts.speak("What keyword should I search for?")
+                elif context == "file_selection":
+                    self.tts.speak("Which file number should I open?")
                 else:
                     self.tts.speak("I didn't catch that. Please say it again.")
-            
+
             command = self.speech_recognizer.listen_for_command()
             if command:
                 self.reset_conversation_state()
                 return command
-            
+
             retry_count += 1
             self.conversation_state['retry_count'] = retry_count
-        
+
         self.reset_conversation_state()
         self.tts.speak("I'm having trouble understanding. Let's go back to the main menu.")
         return None
@@ -121,7 +138,7 @@ class FridayAssistant:
     def _handle_study_plan_creation(self, text):
         subject_name = None
         exam_date = None
-        
+
         patterns = [
             r'(?:create|make).*study.*plan.*for (.+?) (?:for|on) exam (?:on|at) (.+)',
             r'(?:create|make).*study.*plan.*for (.+?) exam (.+)',
@@ -130,7 +147,7 @@ class FridayAssistant:
             r'i want to study (.+?) for exam on (.+)',
             r'plan.*study.*for (.+?) exam (.+)'
         ]
-        
+
         for pattern in patterns:
             match = re.search(pattern, text, re.IGNORECASE)
             if match:
@@ -139,7 +156,7 @@ class FridayAssistant:
                 exam_date = self.study_planner.parse_spoken_date(date_part)
                 if subject_name and exam_date:
                     break
-        
+
         if not subject_name:
             subject_patterns = [
                 r'(?:study|learn|prepare).*for (.+)',
@@ -147,15 +164,16 @@ class FridayAssistant:
                 r'i want to study (.+)',
                 r'help me with (.+)'
             ]
-            
+
             for pattern in subject_patterns:
                 match = re.search(pattern, text, re.IGNORECASE)
                 if match:
                     subject_name = match.group(1).strip()
-                    subject_name = re.sub(r'\b(exam|test|final|midterm|quiz)\b', '', subject_name, flags=re.IGNORECASE).strip()
+                    subject_name = re.sub(r'\b(exam|test|final|midterm|quiz)\b', '', subject_name,
+                                          flags=re.IGNORECASE).strip()
                     if subject_name:
                         break
-        
+
         if subject_name and exam_date:
             self.tts.speak(f"Creating study plan for {subject_name} with exam on {exam_date}...")
             study_plan = self.study_planner.create_study_plan_from_single_command(subject_name, exam_date)
@@ -183,7 +201,8 @@ class FridayAssistant:
             self.tts.speak("I need more details. What subject do you want to study?")
             subject_name = self.listen_with_retry(context="subject_name", max_retries=2)
             if subject_name:
-                self.tts.speak(f"Got {subject_name}. When is the exam date? Please say something like 'December 15 2025'.")
+                self.tts.speak(
+                    f"Got {subject_name}. When is the exam date? Please say something like 'December 15 2025'.")
                 date_text = self.listen_with_retry(context="exam_date", max_retries=2)
                 if date_text:
                     exam_date = self.study_planner.parse_spoken_date(date_text)
@@ -222,7 +241,7 @@ class FridayAssistant:
                 prompt="Please say the number of the date you want me to clear, or say 'delete all' to clear everything.",
                 max_retries=3
             )
-            
+
             if not choice_text:
                 return "I couldn't understand your choice after several attempts."
 
@@ -360,15 +379,135 @@ class FridayAssistant:
         # Send immediately without confirmation
         result = self.email_manager.send_email(recipient_email, subject, content)
         return result
+
+    # NEW: File Search Methods
+    def _handle_file_search(self, text):
+        """Handle file content search requests"""
+        # Extract keyword from command
+        keyword = None
+        
+        # NEW: Updated command pattern to "get files with <keyword>"
+        search_patterns = [
+            r'get files? with (.+)',
+            r'find files? containing (.+)',
+            r'search for (.+) in files',
+            r'find documents? with (.+)',
+            r'where is (.+) in my files',
+            r'look for (.+) in documents'
+        ]
+        
+        for pattern in search_patterns:
+            match = re.search(pattern, text, re.IGNORECASE)
+            if match:
+                keyword = match.group(1).strip()
+                break
+        
+        # If no pattern matched, try to extract keyword
+        if not keyword:
+            if "with" in text:
+                keyword = text.split("with")[1].strip()
+            elif "containing" in text:
+                keyword = text.split("containing")[1].strip()
+            elif "for" in text:
+                parts = text.split("for")
+                if len(parts) > 1:
+                    keyword = parts[1].strip()
+            else:
+                # Use the whole command as keyword
+                for word in ["get files", "find", "search", "where", "look", "file", "files", "document", "documents"]:
+                    text = text.replace(word, "")
+                keyword = text.strip()
+        
+        if not keyword or len(keyword) < 2:
+            self.tts.speak("What keyword should I search for in your files?")
+            keyword_response = self.listen_with_retry(context="search_keyword", max_retries=2)
+            if keyword_response:
+                keyword = keyword_response
+            else:
+                return "I need a keyword to search for."
+        
+        self.tts.speak(f"Searching for '{keyword}' in your files. This may take a moment.")
+        print(f"🔍 Searching for '{keyword}' in files...")
+        
+        # Perform search
+        results = self.file_search.search_files_by_content(keyword)
+        
+        if not results:
+            return f"No files found containing '{keyword}'"
+        
+        # Store results for later selection
+        self.last_search_results = results
+        self.last_search_keyword = keyword
+        
+        # Format results for display
+        if len(results) > 10:
+            result_text = f"Found {len(results)} files. Showing first 10:\n\n"
+            display_results = results[:10]
+        else:
+            result_text = f"Found {len(results)} files:\n\n"
+            display_results = results
+        
+        for i, result in enumerate(display_results, 1):
+            folder_name = os.path.basename(result['folder'])
+            result_text += f"{i}. {result['name']} (in {folder_name})\n"
+        
+        result_text += f"\nSay 'open number X' to open a file, or 'show all' to see all {len(results)} files."
+        
+        # NEW: Enter file selection mode - don't return to wake word detection
+        self.in_file_selection_mode = True
+        
+        return result_text
+
+    def _handle_file_open(self, text):
+        """Handle opening files from search results"""
+        if not hasattr(self, 'last_search_results') or not self.last_search_results:
+            return "No recent search results. Please search for files first."
+        
+        # Extract number from command
+        number_match = re.search(r'open\s+(?:number\s+)?(\d+)', text, re.IGNORECASE)
+        if number_match:
+            file_number = int(number_match.group(1))
             
-    
-    
+            if 1 <= file_number <= len(self.last_search_results):
+                file_path = self.last_search_results[file_number - 1]['path']
+                file_name = self.last_search_results[file_number - 1]['name']
+                
+                if self.file_search.open_file(file_path):
+                    # NEW: Exit file selection mode after opening
+                    self.in_file_selection_mode = False
+                    return f"Opening {file_name}"
+                else:
+                    return f"Could not open {file_name}"
+            else:
+                return f"Please choose a number between 1 and {len(self.last_search_results)}"
+        
+        elif "show all" in text:
+            result_text = f"All {len(self.last_search_results)} files found for '{self.last_search_keyword}':\n\n"
+            for i, result in enumerate(self.last_search_results, 1):
+                result_text += f"{i}. {result['name']}\n   Path: {result['path']}\n\n"
+            return result_text
+        
+        else:
+            return "Say 'open number X' where X is the file number, or 'show all' to see all files."
 
     def handle_intent(self, text):
         text = (text or "").lower().strip()
 
-        # Email Commands - MORE AGGRESSIVE MATCHING
-        if any(cmd in text for cmd in ["write email to", "compose email to", "create email to"]):
+        # NEW: File Search Commands - Updated pattern to "get files with"
+        if any(cmd in text for cmd in ["get files with", "get file with", "get files containing"]):
+            return self._handle_file_search(text)
+        
+        elif any(cmd in text for cmd in ["find file", "search for", "where is", "look for", "find document"]):
+            return self._handle_file_search(text)
+        
+        elif text.startswith("open number") or text.startswith("open file"):
+            return self._handle_file_open(text)
+        
+        elif "show all" in text and hasattr(self, 'last_search_results'):
+            return self._handle_file_open(text)
+
+        # Email Commands
+        elif any(cmd in text for cmd in ["write email to", "compose email to", "create email to"]):
             return self._handle_email_creation(text)
 
         elif any(cmd in text for cmd in ["send email to", "email to", "mail to"]):
@@ -387,9 +526,9 @@ class FridayAssistant:
             return self.contact_manager.list_contacts()
 
         # Shutdown command
-        if any(cmd in text for cmd in ["shutdown", "power off", "turn off computer"]):
+        elif any(cmd in text for cmd in ["shutdown", "power off", "turn off computer"]):
             return self.system_commands.shutdown_computer(self.tts)
-        
+
         # Study Planner commands
         elif any(cmd in text for cmd in ["today's study", "study schedule", "what should i study", "today study"]):
             schedule = self.study_planner.get_todays_study_schedule()
@@ -407,8 +546,9 @@ class FridayAssistant:
 
         elif any(cmd in text for cmd in ["create study plan", "make study schedule", "new study plan"]):
             return self._handle_study_plan_creation(text)
-            
-        elif any(phrase in text for phrase in ["clear study plan", "delete study plan", "remove study plan", "erase study plan"]):
+
+        elif any(phrase in text for phrase in
+                 ["clear study plan", "delete study plan", "remove study plan", "erase study plan"]):
             return self.study_planner.clear_study_plan()
 
         # Google Search
@@ -446,69 +586,70 @@ class FridayAssistant:
         # Music
         elif "play playlist" in text or "play all songs" in text:
             return self.music_player.play_playlist()
-        
+
         elif text.startswith("play "):
             song = self.music_player.extract_song_name(text)
             return self.music_player.play_song(song)
 
-        # Websites
-        website_commands = {
-            "open youtube": "youtube",
-            "open instagram": "instagram", 
-            "open github": "github",
-            "open linkedin": "linkedin",
-            "open chat gpt": "chat gpt",
-            "open gmail": "gmail",
-            "open whatsapp": "whatsapp",
-            "open aums": "aums"
-        }
-        
-        for cmd, site in website_commands.items():
-            if cmd in text:
-                return self.web_search.open_website(site)
+        # Websites - INDIVIDUAL COMMANDS (more specific)
+        elif "open youtube" in text:
+            return self.web_search.open_website("youtube")
+        elif "open instagram" in text:
+            return self.web_search.open_website("instagram")
+        elif "open github" in text:
+            return self.web_search.open_website("github")
+        elif "open linkedin" in text:
+            return self.web_search.open_website("linkedin")
+        elif "open chat gpt" in text or "open chatgpt" in text:
+            return self.web_search.open_website("chat gpt")
+        elif "open gmail" in text:
+            return self.web_search.open_website("gmail")
+        elif "open whatsapp" in text:
+            return self.web_search.open_website("whatsapp")
+        elif "open aums" in text:
+            return self.web_search.open_website("aums")
 
         # Date & Time
-            elif "date" in text or "time" in text:
-                return self.system_commands.get_date_time(text)
+        elif "date" in text or "time" in text:
+            return self.system_commands.get_date_time(text)
 
         # Greetings
-            elif "how are you" in text:
-                return "I'm great, thanks for asking!"
-            elif "who are you" in text:
-                return "I am Friday, your personal AI assistant. I'm here to help you with tasks, searches, and more."
-            elif "what is your name" in text:
-                return "My name is Friday."
+        elif "how are you" in text:
+            return "I'm great, thanks for asking!"
+        elif "who are you" in text:
+            return "I am Friday, your personal AI assistant. I'm here to help you with tasks, searches, and more."
+        elif "what is your name" in text:
+            return "My name is Friday."
 
         # Holidays
-            elif "holiday" in text or "important day" in text or "today special" in text:
-                return self.calendar_service.get_important_days()
+        elif "holiday" in text or "important day" in text or "today special" in text:
+            return self.calendar_service.get_important_days()
 
         # Exit
-            elif "goodbye" in text or "bye" in text:
-                response = "Goodbye, have a nice day, Friday going offline."
-                self.tts.speak(response)
-                sys.exit(0)
+        elif "goodbye" in text or "bye" in text:
+            response = "Goodbye, have a nice day, Friday going offline."
+            self.tts.speak(response)
+            sys.exit(0)
 
         # Gemini fallback for everything else
-            else:
-                response = self.gemini_client.query_gemini(text, self.memory_manager.conversation_history)
-                if isinstance(response, str) and ("Gemini API error" in response or "did not return" in response):
-                    try:
-                      info = wikipedia.summary(text, sentences=2)
-                      return info
-                    except:
-                      return f"Could not find an answer. You can search online: https://www.google.com/search?q={text}"
+        else:
+            response = self.gemini_client.query_gemini(text, self.memory_manager.conversation_history)
+            if isinstance(response, str) and ("Gemini API error" in response or "did not return" in response):
+                try:
+                    info = wikipedia.summary(text, sentences=2)
+                    return info
+                except:
+                    return f"Could not find an answer. You can search online: https://www.google.com/search?q={text}"
             return response
-            
 
     def run(self):
         signal.signal(signal.SIGINT, lambda sig, frame: sys.exit(0))
         self.greet_user()
-        
+
         # Start reminder checking thread
         reminder_thread = threading.Thread(target=self.reminder_manager.check_reminders_loop, daemon=True)
         reminder_thread.start()
-        
+
         # Remind about study schedule on startup
         study_plan = self.study_planner.load_study_plan()
         if study_plan:
@@ -521,7 +662,7 @@ class FridayAssistant:
                 if command:
                     self.reset_conversation_state()
                     response = self.handle_intent(command)
-                    
+
                     # Handle special cases that need voice interaction
                     if response and isinstance(response, dict) and "action" in response:
                         if response["action"] == "shutdown_confirmation":
@@ -532,12 +673,25 @@ class FridayAssistant:
                             else:
                                 self.tts.speak("Shutdown cancelled!")
                         continue
-                    
+
                     if response:
                         self.memory_manager.add_to_memory(command, response)
                         self.tts.speak(response)
+                        
+                        # NEW: Stay in conversation mode for file selection
+                        if self.in_file_selection_mode:
+                            self.tts.speak("What would you like to do with these files?")
+                            follow_up_command = self.speech_recognizer.listen_for_command()
+                            if follow_up_command:
+                                follow_up_response = self.handle_intent(follow_up_command)
+                                if follow_up_response:
+                                    self.memory_manager.add_to_memory(follow_up_command, follow_up_response)
+                                    self.tts.speak(follow_up_response)
+                            # Exit file selection mode after handling follow-up
+                            self.in_file_selection_mode = False
+
 
 if __name__ == "__main__":
     assistant = FridayAssistant()
     assistant.run()
-
+# [file content end]
